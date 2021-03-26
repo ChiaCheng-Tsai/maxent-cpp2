@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="maxent-cpp" />
+		<Option makefile="makefile" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_" />
+		<Build>
+			<Target title="4nodes2d">
+				<Option output="4nodes2d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="./objs" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Option projectCompilerOptionsRelation="1" />
+				<Option projectLinkerOptionsRelation="1" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="6nodes3d">
+				<Option output="6nodes3d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="./objs" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Option projectCompilerOptionsRelation="1" />
+				<Option projectLinkerOptionsRelation="1" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="8nodes3d">
+				<Option output="8nodes3d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="./objs" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Option projectCompilerOptionsRelation="1" />
+				<Option projectLinkerOptionsRelation="1" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="3nodes1d">
+				<Option output="3nodes1d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="./objs" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Option projectCompilerOptionsRelation="1" />
+				<Option projectLinkerOptionsRelation="1" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions -Wno-unused -Wno-format -fopenmp" />
+			<Add option="-DOPENMP_ENABLED" />
+		</Compiler>
+		<Linker>
+			<Add option="-lGKlib -lgomp -lpthread" />
+		</Linker>
+		<Unit filename="3nodes1d.cpp">
+			<Option target="3nodes1d" />
+		</Unit>
+		<Unit filename="4nodes2d.cpp">
+			<Option target="4nodes2d" />
+		</Unit>
+		<Unit filename="6nodes3d.cpp">
+			<Option target="6nodes3d" />
+		</Unit>
+		<Unit filename="8nodes3d.cpp">
+			<Option target="8nodes3d" />
+		</Unit>
+		<Unit filename="Maxent.hpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
