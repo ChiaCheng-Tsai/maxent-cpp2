@@ -47,5 +47,6 @@ int main(int argc, const char * argv[])
     maxent.BasicFunc(NodesContribute,point);
     maxent.CheckConsistency();
 
+    system("pause");
     return 0;
 }

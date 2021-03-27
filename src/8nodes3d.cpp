@@ -49,5 +49,6 @@ int main(int argc, const char * argv[])
     example.BasicFunc(NodesContribute,point);
     example.CheckConsistency();
 
+    system("pause");
     return 0;
 }

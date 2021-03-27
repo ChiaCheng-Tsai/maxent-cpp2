@@ -4,10 +4,14 @@
  *     C++ class that implements the maximum-entropy basis functions            *
  *------------------------------------------------------------------------------*
  *  Version    : 1.0                                                            *
- *  Date       : 24-OCT-2018                                                  *
+ *  Date       : 24-OCT-2018                                                    *
  *  Source code: http://camlab.cl/software/maxent                               *
  *  Author     : R. Silva-Valenzuela, MSc student, rsilvavalenzue@ing.uchile.cl *
  *  Supervisor : A. Ortiz-Bernardin, aortizb@uchile.cl, camlab.cl/alejandro     *
+ *  Version    : 1.1                                                            *
+ *  Date       : 26-MARCH-2021                                                  *
+ *  Source code: https://github.com/FiniteTsai/maxent-cpp2                      *
+ *  Author     : Chia-Cheng Tsai (tsaichiacheng@gmail.com)                      *
  *                                                                              *
  *            (See Copyright and License notice in "license.txt")               *
  *            (See updates and version details in "version.txt")                *
@@ -38,7 +42,7 @@ using namespace std;
 #include <cstdlib> //para exit
 #include <vector>
 #include <iomanip> //Dar formato a nœmeros para la salida del programa
-#include <Eigen/Dense>
+#include <Eigen/DENSE>
 using namespace Eigen;
 
 class Maxent
@@ -271,17 +275,6 @@ void Maxent::MakePhider()
 
   MatrixXd MPhi(NNodesC,dim);
 
-  /*
-  for(int i=0; i<dim;i++)
-  {
-    for(int j=0; j<NNodesC; j++)
-    {
-      MPhi(j,i)=Phi(j);
-    }
-  }
-
-  Phider=MPhi.cwiseProduct(diCoord*MD) + MPhi.cwiseProduct(MA);*/
-
   Phider.resize(NNodesC,dim);
 
   for(int i=0; i<dim; i++)
@@ -301,22 +294,8 @@ void Maxent::MakePhider()
 
 void Maxent::MakePhidder()
 {
-  this->PhiderMatrix();
 
   this->PhidderMatrix();
-
- /* cout<<"invH="<<invH<<endl;
-  cout<<"MA="<<MA<<endl;
-  cout<<"GradMA="<<GradMA<<endl;
-  cout<<"MC="<<MC<<endl;
-  cout<<"GradMC="<<GradMC<<endl;
-  cout<<"A="<<A<<endl;
-  cout<<"V="<<V<<endl;
-  cout<<"GradinvH="<<GradinvH<<endl;
-  cout<<"C="<<C<<endl;
-  cout<<"A1="<<A1<<endl;
-  cout<<"A2="<<A2<<endl;
-  cout<<"A3="<<A3<<endl;*/
 
   Phidder.resize(NNodesC,dim*dim);
 
@@ -336,10 +315,7 @@ void Maxent::MakePhidder()
                                     -V(i,l)*(A1(k,l*dim+j)+A3(k,j*dim+l)) );
      }
   }
-
-
 }
-
 
 VectorXd Maxent::GetPhi()
 {
@@ -377,7 +353,6 @@ void Maxent::CalFlambda(VectorXd &lambda, VectorXd &Flambda, MatrixXd &jacobian)
     Flambda(i)=0;
   }
 
-
   for (int i = 0; i < dim; i++)  // Newton's residual:   F(lambda)=-Sum(Phi*(x-xp),1,NNodesC)
   {
     for(int j=0; j<NNodesC; j++)
@@ -385,7 +360,6 @@ void Maxent::CalFlambda(VectorXd &lambda, VectorXd &Flambda, MatrixXd &jacobian)
       Flambda(i) = Flambda(i)  - (diCoord(j,i) * Phi(j));
     }
   }
-
 
   double Sum=0;
   for(int i=0; i<dim; i++)
@@ -400,7 +374,6 @@ void Maxent::CalFlambda(VectorXd &lambda, VectorXd &Flambda, MatrixXd &jacobian)
       jacobian(i,j)= Sum - Flambda(i)*Flambda(j); //Jacobian (Hessian matrix H in maxent context)
     }
   }
-
 }
 
 void Maxent::PhiderMatrix()
@@ -411,7 +384,9 @@ void Maxent::PhiderMatrix()
   {
     for(int j=0;j<dim;j++)
     {
-      H(i,j)=Phi.dot(diCoord.col(i).cwiseProduct(diCoord.col(j)));
+      H(i,j)=0;
+       for(int k=0;k<NNodesC;k++)
+        H(i,j)=H(i,j)+Phi(k)*diCoord(k,i)*diCoord(k,j);
     }
   }
 
@@ -431,14 +406,18 @@ void Maxent::PhiderMatrix()
   {
     for(int j=0;j<dim;j++)
     {
-      A(i,j)=(Phi.cwiseProduct(MA.col(j))).dot( diCoord.col(i) );
+     A(i,j) = 0;
+     for(int k=0;k<NNodesC;k++)
+      A(i,j) = A(i,j) + Phi(k)*MA(k,j)*diCoord(k,i);
     }
   }
 
   MC.resize(dim);
   for(int i=0; i<dim;i++)
   {
-    MC(i)=Phi.dot(MA.col(i));
+   MC(i)=0;
+    for(int k=0;k<NNodesC;k++)
+     MC(i)=MC(i)+Phi(k)*MA(k,i);
   }
 
   MD=invH-invH*A;
