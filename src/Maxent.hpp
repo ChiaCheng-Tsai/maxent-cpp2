@@ -50,7 +50,6 @@ class Maxent
 private:
 
   int dim; //spatial dimension
-  string scheme; // solution scheme "newton"
   string prior; // prior in the weight function either "uniform", "cubic", "quartic", "gaussian".
   double radious; //is the support size
   int MaxIter; //maximum number of iteration
@@ -110,7 +109,6 @@ public:
 Maxent::Maxent(int auxdim, string auxprior, int auxMaxIter, double auxctol, bool auxmaxentprint, double auxgamma, double auxhnode)
 {
   dim=auxdim;
-  scheme="newton";
   prior=auxprior;
   MaxIter=auxMaxIter;
   ctol=auxctol;
@@ -146,7 +144,6 @@ Maxent::Maxent()
 Maxent::Maxent(const Maxent& Maxentold)
 {
   dim=Maxentold.dim;
-  scheme=Maxentold.scheme;
   prior=Maxentold.prior;
   radious=Maxentold.radious;
   MaxIter=Maxentold.MaxIter;
@@ -159,7 +156,6 @@ Maxent::Maxent(const Maxent& Maxentold)
 void Maxent::operator=(const Maxent& Maxentnew)
 {
   dim=Maxentnew.dim;
-  scheme=Maxentnew.scheme;
   prior=Maxentnew.prior;
   radious=Maxentnew.radious;
   MaxIter=Maxentnew.MaxIter;
